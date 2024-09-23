@@ -1,0 +1,30 @@
+    {% load static %}
+<html>
+    <head>
+        <title>Quotes App</title>
+        <link rel="stylesheet" href="/static/styles.css">
+        <!-- <link rel="stylesheet" href="{% static 'styles.css' %}"> -->
+    </head>
+
+    <body>
+        <header>
+            <h1>Thomas Edison Quote of The Day</h1>
+        </header>
+        <main>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home' %}">Quote</a></li>
+                    <li><a href="{% url 'show_all' %}">Show All</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                </ul>
+            </nav>
+
+            <div>
+                {% block content %}
+                <!-- fill in this section with specific page detail -->
+                {% endblock %}
+            </div>
+        </main>
+
+    </body>
+</html>
