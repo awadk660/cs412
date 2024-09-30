@@ -1,0 +1,46 @@
+{% extends 'restaurant/base.html' %}
+
+{% block content %}
+    <h2>Place An Order</h2>
+    <form action="{% url 'confirmation' %}" method="POST">
+        {% csrf_token %}
+        Todays Special Sandwich: <br>
+        <input type="radio" name="special" value="{{special}}"> {{special}}
+        <br>
+        <strong>OR</strong> Make your own:
+        <br>
+        Bread:
+        <ul>
+            <li><input type="radio" name="bread" value="Italian $2">Italian $2</li>
+            <li><input type="radio" name="bread" value="Round Roll $2">Round Roll $2</li>
+        </ul>
+
+        Meat:
+        <ul>
+            <li><input type="checkbox" name="meat" value="Chicken,10">Chicken $10</li>
+            <li><input type="checkbox" name="meat" value="Roast Beef,10">Roast Beef $10</li>
+            <li><input type="checkbox" name="meat" value="Ham,12">Ham $12</li>
+            <li><input type="checkbox" name="meat" value="Bacon,8">Bacon $8</li>
+        </ul>
+
+        Toppings:
+        <ul>
+            <li><input type="checkbox" name="toppings" value="Roasted red peppers,2">Roasted red peppers $2</li>
+            <li><input type="checkbox" name="toppings" value="Pickled egg plant,2">Pickled egg plant $2</li>
+            <li><input type="checkbox" name="toppings" value="Sun dried tomatoes,2">Sun dried tomatoes $2</li>
+            <li><input type="checkbox" name="toppings" value="Lettuce,0">Lettuce</li>
+            <li><input type="checkbox" name="toppings" value="Cheese,3">Cheese $3</li>
+            <li><input type="checkbox" name="toppings" value="Olives,1">Olives $1</li>
+        </ul>
+
+        Special Instructions:
+        <textarea name="special_instructions" rows="3" cols="60"></textarea>
+        <br>
+        
+        Name: <input type="text" name="name" required> <br>
+        Phone #: <input type="text" name="phone" required> <br>
+        Email: <input type="email" name="email"> <br>
+
+        <input type="submit">
+    </form>
+{% endblock %}

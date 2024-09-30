@@ -22,6 +22,7 @@ from django.conf import settings
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('', include('quotes.urls')), ## we create the URL hw/, 
-                                     ## and associate it with URLs in another file
+    path('', include('restaurant.urls')),
+
 ] + static(settings.STATIC_URL,
            document_root=settings.STATIC_ROOT)
