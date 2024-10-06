@@ -6,6 +6,6 @@ from .models import Profile
 from django.views.generic import ListView
 
 class ShowAllProfilesView(ListView):
-    template_name = 'mini_fb/show_all_files.html'
+    template_name = 'mini_fb/show_all_profiles.html'
     model = Profile
     context_object_name = 'profiles'
