@@ -1,0 +1,11 @@
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+        {% for p in profiles %}
+        <tr>
+            <td><img src="{{p.image_url}}"></td>
+            <td><p style="color: white;">{{p.first_name}} {{p.last_name}}</p></td>
+            <td><p style="color: white;">{{p.city}}</p></td>
+        </tr>
+        {% endfor %}
+{% endblock %}

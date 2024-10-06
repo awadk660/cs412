@@ -21,8 +21,9 @@ from django.conf import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('', include('quotes.urls')), ## we create the URL hw/, 
+    path('', include('quotes.urls')),
     path('', include('restaurant.urls')),
+    path('mini_fb/', include('mini_fb.urls')),
 
 ] + static(settings.STATIC_URL,
            document_root=settings.STATIC_ROOT)

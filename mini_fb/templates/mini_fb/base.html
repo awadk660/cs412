@@ -1,0 +1,27 @@
+{% load static %}
+<html>
+    <head>
+        <title>Mini Facebook App</title>
+        <link rel="stylesheet" href="{% static 'mini_fbStyles.css' %}">
+    </head>
+
+    <body>
+        <header>
+            <h1>Mini Facebook</h1>
+        </header>
+        <main>
+            <div>
+                <table border="1">
+                {% block content %}
+                <!-- fill in this section with specific page detail -->
+                {% endblock %}
+                </table>
+            </div>
+        </main>
+
+        <footer>
+            <p>Made by Awad Khawaja, CS 412 Assignment 5</p>
+        </footer>
+
+    </body>
+</html>
