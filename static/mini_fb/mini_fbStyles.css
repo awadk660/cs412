@@ -1,0 +1,51 @@
+header {
+    background-color: blue;
+    color: white;
+    margin-bottom: 5px;
+}
+
+main {
+    background-color: blue;
+    color: white
+}
+
+footer {
+    background-color: blue;
+    color: white
+}
+
+table {
+    margin: 0 auto;
+}
+
+img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+nav {
+    background-color: blue;
+}
+
+ul, li {
+    list-style-type: none;
+}
+
+.profile-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.profile-image {
+    margin-right: 20px;
+}
+
+.profile-image img {
+    height: auto;
+}
+
+.profile-details p {
+    margin: 0;
+}

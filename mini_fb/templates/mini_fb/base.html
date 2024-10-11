@@ -2,12 +2,19 @@
 <html>
     <head>
         <title>Mini Facebook App</title>
-        <link rel="stylesheet" href="{% static 'mini_fbStyles.css' %}">
+        <link rel="stylesheet" href="{% static 'mini_fb/mini_fbStyles.css' %}">
     </head>
 
     <body>
         <header>
             <h1>Mini Facebook</h1>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="{% url 'show_all_profiles' %}"><h4>All Profiles</h4></a>
+                    </li>
+                </ul>
+            </nav>
         </header>
         <main>
             <div>

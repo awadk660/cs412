@@ -4,7 +4,7 @@
         {% for p in profiles %}
         <tr>
             <td><img src="{{p.image_url}}"></td>
-            <td><p style="color: white;">{{p.first_name}} {{p.last_name}}</p></td>
+            <td><a href="{% url 'show_profile' p.pk %}"><p style="color: white;">{{p.first_name}} {{p.last_name}}</p></a></td>
             <td><p style="color: white;">{{p.city}}</p></td>
         </tr>
         {% endfor %}

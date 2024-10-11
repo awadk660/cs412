@@ -16,3 +16,17 @@ class Profile(models.Model):
         '''Return a string representation of this object.'''
 
         return f'{self.first_name} {self.last_name}'
+    
+    def get_status_messages(self):
+        statusMessages = StatusMessage.objects.filter(profile=self).order_by('-timestamp')
+        return statusMessages
+
+class StatusMessage(models.Model):
+    '''StatusMessage Object'''
+    timestamp = models.DateTimeField(auto_now=True)
+    message = models.TextField(blank=False)
+    profile = models.ForeignKey("Profile", on_delete=models.CASCADE)
+
+    def __str__(self):
+        '''Return the string representation of this message.'''
+        return f'{self.message}'
