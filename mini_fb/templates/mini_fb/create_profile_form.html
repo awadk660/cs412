@@ -1,0 +1,17 @@
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+    <h2>Create A Profile</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" name="submit" value="Create Profile">
+    </form>
+
+    <!-- The cancel button is its own form -->
+    <form action="{% url 'show_all_profiles' %}">
+        <input type="submit" name="Cancel" value="Cancel">
+    </form>
+{% endblock %}

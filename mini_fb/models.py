@@ -1,6 +1,7 @@
 # mini_fb/models.py
 # Definte the data objects for our application
 from django.db import models
+from django.urls import reverse
 
 class Profile(models.Model):
     '''Profile object'''
@@ -20,6 +21,10 @@ class Profile(models.Model):
     def get_status_messages(self):
         statusMessages = StatusMessage.objects.filter(profile=self).order_by('-timestamp')
         return statusMessages
+    
+    def get_absolute_url(self):
+        return reverse('show_profile', kwargs={'pk': self.pk})
+
 
 class StatusMessage(models.Model):
     '''StatusMessage Object'''
