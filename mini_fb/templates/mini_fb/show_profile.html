@@ -9,6 +9,7 @@
             <p>{{profile.first_name}} {{profile.last_name}}</p>
             <p>{{profile.city}}</p>
             <a href="{% url 'create_status' profile.pk %}"><p style="color: white;">Click to Create Message</p></a>
+            <a href="{% url 'update_profile' profile.pk %}"><p style="color: white;">Update Profile</p></a>
         </div>
     </div>
 
@@ -20,6 +21,13 @@
                 <div>
                     <strong>{{message.timestamp}}</strong>
                     <p>{{message.message}}</p>
+                    <div style="display: flex;">
+                        <a href="{% url 'update_status' message.pk %}"><p style="color: gray; margin: 0;">Update</p></a>
+                        <a href="{% url 'delete_status' message.pk %}"><p style="color: gray; margin: 0; margin-left: 10px;">Delete</p></a>
+                    </div>
+                    {% for img in message.get_images %}
+                        <img src='{{img.file.url}}' alt='Image not found: {{img.file.url}}'>
+                    {% endfor %}
                 </div>
             {% endfor %}
         {% else %}
