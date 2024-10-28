@@ -10,10 +10,34 @@
             <p>{{profile.city}}</p>
             <a href="{% url 'create_status' profile.pk %}"><p style="color: white;">Click to Create Message</p></a>
             <a href="{% url 'update_profile' profile.pk %}"><p style="color: white;">Update Profile</p></a>
+            <a href="{% url 'news_feed' profile.pk %}"><p style="color: white;">News Feed</p></a>
         </div>
     </div>
 
+    <div>
+        <h2>{{profile.first_name}}'s friends</h2>
+        {% if profile.get_friends %}
+            <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+                {% for friend in profile.get_friends %}
+                    <div style="text-align: center;">
+                        <img src="{{friend.image_url}}" alt="profile pic" style="width: 100px; height: 100px; object-fit: cover; border-radius: 25%;">
+                        <div style="margin-top: 10px;">
+                            <a href="{% url 'show_profile' friend.pk %}"><p style="color: gray;">{{friend.first_name}} {{friend.last_name}}</p></a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No friends :(</p>
+        {% endif %}
+    </div>
 
+    <div>
+        <a href="{% url 'friend_suggestions' profile.pk %}">
+            <button style="margin-top: 20px;">Friend Suggestions</button>
+        </a>
+    </div>
+    
     <div>
         {% if profile.get_status_messages %}
             <h2>Comments</h2>       

@@ -3,7 +3,7 @@
 
 from django.shortcuts import render, redirect
 from .models import *
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
 from .forms import *
 from django.urls import reverse
 
@@ -78,3 +78,39 @@ class UpdateStatusMessageView(UpdateView):
     def get_success_url(self):
         profile = self.object.profile
         return reverse('show_profile', kwargs={'pk':profile.pk})
+    
+class CreateFriendView(View):
+
+    def dispatch(self, request, *args, **kwargs):
+        profile_pk = self.kwargs['pk']
+        other_pk = self.kwargs['other_pk']
+
+        profile = Profile.objects.get(pk=profile_pk)
+        otherProfile = Profile.objects.get(pk=other_pk)
+
+        profile.add_friend(other=otherProfile)
+        return redirect('show_profile', pk=profile.pk)
+    
+class ShowFriendSuggestionsView(DetailView):
+    '''Display friend suggestions for a profile'''
+    model = Profile
+    template_name="mini_fb/friend_suggestions.html"
+    context_object_name="profile"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        profile = self.get_object()
+        context['friend_suggestions'] = profile.get_friend_suggestions()
+        return context
+
+class ShowNewsFeedView(DetailView):
+    model = Profile
+    template_name="mini_fb/news_feed.html"
+    context_object_name = "profile"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        profile = self.get_object()
+        context['news_feed'] = profile.get_news_feed()
+        return context
+

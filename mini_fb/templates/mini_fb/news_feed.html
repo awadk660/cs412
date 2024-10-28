@@ -1,0 +1,35 @@
+{% extends "mini_fb/base.html" %}
+
+{% block content %}
+<div>
+    <a href="{% url 'show_profile' profile.pk %}">
+        <button style="margin-top: 20px;">Back to Profile</button>
+    </a>
+    <h2>{{ profile.first_name }}'s News Feed</h2>
+    {% if news_feed %}
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+            {% for status in news_feed %}
+                <div style="border: 1px solid #ddd; padding: 15px;">
+                    <div style="display: flex; align-items: center;">
+                        <img src="{{ status.profile.image_url }}" alt="profile pic" style="width: 50px; height: 50px; object-fit: cover; border-radius: 25%;">
+                        <div style="margin-left: 10px;">
+                            <a href="{% url 'show_profile' status.profile.pk %}">
+                                <p style="margin: 0; font-weight: bold;">{{ status.profile.first_name }} {{ status.profile.last_name }}</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <p>{{ status.message }}</p>
+                        <p style="color: gray; font-size: 0.9em;">{{ status.timestamp }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No status messages available.</p>
+    {% endif %}
+    <a href="{% url 'show_profile' profile.pk %}">
+        <button style="margin-top: 20px;">Back to Profile</button>
+    </a>
+</div>
+{% endblock %}
