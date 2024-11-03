@@ -8,9 +8,11 @@
         <div class="profile-details">
             <p>{{profile.first_name}} {{profile.last_name}}</p>
             <p>{{profile.city}}</p>
-            <a href="{% url 'create_status' profile.pk %}"><p style="color: white;">Click to Create Message</p></a>
-            <a href="{% url 'update_profile' profile.pk %}"><p style="color: white;">Update Profile</p></a>
-            <a href="{% url 'news_feed' profile.pk %}"><p style="color: white;">News Feed</p></a>
+            {% if user.is_authenticated and user == profile.user %}
+                <a href="{% url 'create_status' %}"><p style="color: white;">Click to Create Message</p></a>
+                <a href="{% url 'update_profile' %}"><p style="color: white;">Update Profile</p></a>
+            {% endif %}
+            <a href="{% url 'news_feed' %}"><p style="color: white;">News Feed</p></a>
         </div>
     </div>
 
@@ -32,11 +34,13 @@
         {% endif %}
     </div>
 
-    <div>
-        <a href="{% url 'friend_suggestions' profile.pk %}">
-            <button style="margin-top: 20px;">Friend Suggestions</button>
-        </a>
-    </div>
+    {% if user.is_authenticated and user == profile.user %}
+        <div>
+            <a href="{% url 'friend_suggestions' %}">
+                <button style="margin-top: 20px;">Friend Suggestions</button>
+            </a>
+        </div>
+    {% endif %}
     
     <div>
         {% if profile.get_status_messages %}
@@ -45,10 +49,12 @@
                 <div>
                     <strong>{{message.timestamp}}</strong>
                     <p>{{message.message}}</p>
-                    <div style="display: flex;">
-                        <a href="{% url 'update_status' message.pk %}"><p style="color: gray; margin: 0;">Update</p></a>
-                        <a href="{% url 'delete_status' message.pk %}"><p style="color: gray; margin: 0; margin-left: 10px;">Delete</p></a>
-                    </div>
+                    {% if user.is_authenticated and user == profile.user %}
+                        <div style="display: flex;">
+                            <a href="{% url 'update_status' message.pk %}"><p style="color: gray; margin: 0;">Update</p></a>
+                            <a href="{% url 'delete_status' message.pk %}"><p style="color: gray; margin: 0; margin-left: 10px;">Delete</p></a>
+                        </div>
+                    {% endif %}
                     {% for img in message.get_images %}
                         <img src='{{img.file.url}}' alt='Image not found: {{img.file.url}}'>
                     {% endfor %}

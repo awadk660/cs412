@@ -13,7 +13,7 @@
                         <a href="{% url 'show_profile' friend.pk %}">
                             <p style="color: gray;">{{ friend.first_name }} {{ friend.last_name }}</p>
                         </a>
-                        <a href="{% url 'add_friend' profile.pk friend.pk %}">
+                        <a href="{% url 'add_friend' friend.pk %}">
                             <button style="margin-top: 5px;">Add Friend</button>
                         </a>
                     </div>

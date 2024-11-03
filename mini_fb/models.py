@@ -2,6 +2,7 @@
 # Definte the data objects for our application
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 class Profile(models.Model):
     '''Profile object'''
@@ -12,6 +13,7 @@ class Profile(models.Model):
     city = models.TextField(blank=False)
     email = models.EmailField(blank=False)
     image_url = models.URLField(blank=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
         '''Return a string representation of this object.'''
