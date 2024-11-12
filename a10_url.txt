@@ -1,0 +1,1 @@
+https://quotes-app-cs412-cc6a468d3f11.herokuapp.com/voter_analytics/
