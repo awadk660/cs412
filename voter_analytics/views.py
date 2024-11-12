@@ -13,7 +13,7 @@ class VoterListView(ListView):
     context_object_name = 'voters'
     paginate_by = 100  # Show 100 voters per page
 
-    def get_queryset(self) -> QuerySet[Any]:
+    def get_queryset(self):
         '''Limit the results based on filtering criteria.'''
 
         # Default query set is all of the records:
@@ -68,7 +68,7 @@ class GraphsView(ListView):
     model = Voter
     context_object_name = "voters"
 
-    def get_queryset(self) -> QuerySet[Any]:
+    def get_queryset(self):
         '''Limit the results based on filtering criteria.'''
 
         # Default query set is all of the records:
