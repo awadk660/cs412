@@ -1,7 +1,3 @@
-from cProfile import label
-from optparse import Values
-from turtle import title, width
-from typing import Any
 from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
