@@ -1,0 +1,53 @@
+<h3>Search</h3>
+
+<form method="GET" action="{{ form_action }}">
+  <label for="party">Party Affiliation:</label>
+  <select name="party" id="party">
+    <option value=""  {% if request.GET.party == "" %} selected {% endif %}>All</option>
+    <option value="D" {% if request.GET.party == "D" %} selected {% endif %}>Democrat</option>
+    <option value="R"  {% if request.GET.party == "R" %} selected {% endif %}>Republican</option>
+    <option value="CC"  {% if request.GET.party == "CC" %} selected {% endif %}>Constitution Party</option>
+    <option value="L"  {% if request.GET.party == "L" %} selected {% endif %}>Libertarian Party</option>
+    <option value="T"  {% if request.GET.party == "T" %} selected {% endif %}>Tea Party</option>
+    <option value="O"  {% if request.GET.party == "O" %} selected {% endif %}>Other Party</option>
+    <option value="G"  {% if request.GET.party == "G" %} selected {% endif %}>Green Party</option>
+    <option value="J"  {% if request.GET.party == "J" %} selected {% endif %}>Independent Party</option>
+    <option value="Q"  {% if request.GET.party == "Q" %} selected {% endif %}>Reform Party</option>
+    <option value="FF"  {% if request.GET.party == "FF" %} selected {% endif %}>Freedom Party</option>
+  </select>
+
+  <label for="min_dob">Minimum Date of Birth:</label>
+  <select name="min_dob" id="min_dob">
+    <option value="">Any</option>
+    {% for year in years %}
+    <option value="{{ year }}" {% if request.GET.min_dob == year|stringformat:"s" %} selected {% endif %}>{{ year }}</option>
+    {% endfor %}
+  </select>
+
+  <label for="max_dob">Maximum Date of Birth:</label>
+  <select name="max_dob" id="max_dob">
+    <option value="">Any</option>
+    {% for year in years %}
+    <option value="{{ year }}" {% if request.GET.max_dob == year|stringformat:"s" %} selected {% endif %}>{{ year }}</option>
+    {% endfor %}
+  </select>
+
+  <label for="voter_score">Voter Score:</label>
+  <select name="voter_score" id="voter_score">
+    <option value="">Any</option>
+    {% for score in voterscores %}
+    <option value="{{ score }}" {% if request.GET.voter_score == score|stringformat:"s" %}selected{% endif %}>{{ score }}</option>
+    {% endfor %}
+  </select>
+
+  <fieldset>
+    <legend>Voted in Specific Elections:</legend>
+    <label><input type="checkbox" name="elections" value="election1" {% if 'election1' in selected_elections %} checked {% endif %} /> Election 1</label><br />
+    <label><input type="checkbox" name="elections" value="election2" {% if 'election2' in selected_elections %} checked {% endif %} /> Election 2</label><br />
+    <label><input type="checkbox" name="elections" value="election3" {% if 'election3' in selected_elections %} checked {% endif %} /> Election 3</label><br />
+    <label><input type="checkbox" name="elections" value="election4" {% if 'election4' in selected_elections %} checked {% endif %} /> Election 4</label><br />
+    <label><input type="checkbox" name="elections" value="election5" {% if 'election5' in selected_elections %} checked {% endif %} /> Election 5</label><br />
+  </fieldset>
+
+  <button type="submit">Filter</button>
+</form>

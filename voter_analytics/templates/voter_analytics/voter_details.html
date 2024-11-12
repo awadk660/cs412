@@ -1,0 +1,54 @@
+{% extends 'voter_analytics/base.html' %} {% block content %}
+<div class="container">
+  <h1>Voter Details</h1>
+  <div class="row">
+    <table>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Street Address</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Zip Code</th>
+        <th>Date of Birth</th>
+        <th>Party Affiliation</th>
+        <th>Voter Score</th>
+        <th>Registration Date</th>
+        <th>Voted in Past Elections</th>
+      </tr>
+      <tr>
+        <td>{{ voter.first_name }}</td>
+        <td>{{ voter.last_name }}</td>
+        <td>
+          {{ voter.addressStreetNumber }} {{ voter.addressStreetName }} 
+          {% if voter.addressAptNum %} , Apt {{ voter.addressAptNum }} {% endif %}
+        </td>
+        <td>Newton</td>
+        <td>MA</td>
+        <td>{{ voter.addressZipCode }}</td>
+        <td>{{ voter.dob }}</td>
+        <td>{{ voter.partyAffiliation }}</td>
+        <td>{{ voter.voterScore }}</td>
+        <td>{{ voter.voterRegistration }}</td>
+        <td>
+            {% if voter.vote1 %}Election 1: Yes{% else %}Election 1: No{% endif %}<br>
+            {% if voter.vote2 %}Election 2: Yes{% else %}Election 2: No{% endif %}<br>
+            {% if voter.vote3 %}Election 3: Yes{% else %}Election 3: No{% endif %}<br>
+            {% if voter.vote4 %}Election 4: Yes{% else %}Election 4: No{% endif %}<br>
+            {% if voter.vote5 %}Election 5: Yes{% else %}Election 5: No{% endif %}
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="row">
+    <p>
+      <a
+        href="https://www.google.com/maps/search/?api=1&query={{ voter.addressStreetNumber }}+{{ voter.addressStreetName }}{% if voter.addressAptNum %}+Apt+{{ voter.addressAptNum }}{% endif %}, Newton, MA + {{ voter.addressZipCode }}"
+        target="_blank"
+        >View on Google Maps</a
+      >
+    </p>
+  </div>
+</div>
+{% endblock %}
