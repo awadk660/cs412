@@ -1,0 +1,98 @@
+{% extends "project/base.html" %}
+
+{% block content %}
+    <h2>{{ user.username }}'s Profile</h2>
+    <h4>Welcome to your fitness dashboard!</h4>
+    
+    <div class="today-stats">
+        <h2>Today's Stats</h2>
+        <div>
+            {% if today_workouts %}
+                <h4>Activity Today</h4>
+                <ul>
+                    {% for workout in today_workouts %}
+                        <li>{{workout}}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>You haven't logged a workout today</p>
+                <a href="{% url 'create_workout' user.pk %}" class="btn">
+                    Log Today's Workout
+                </a>
+            {% endif %}
+        </div>
+        <div>
+            {% if today_meals %}
+                <h3>{{total_calories_today}}/{{daily_calorie_goal}} of daily calorie goal</h3>
+                <h4>Meals Today <a href="{% url 'add_meal' user.pk %}" style="display: inline-block; color: #3498db; text-decoration: none;">+</a>
+                </h4>
+                <ul>
+                    {% for meal in today_meals %}
+                        <li>{{meal.meal_type}}, {{meal.calories}} calories, {{meal.description}}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>You haven't logged a meal today</p>
+                <a href="{% url 'add_meal' user.pk %}" class="btn">
+                    Log A Meal
+                </a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="action-buttons" style="text-align: center;">
+        <a href="{% url 'add_meal' user.pk %}" class="btn">
+            Log Meal
+        </a>
+        <a href="{% url 'graphs' user.pk %}" class="btn">
+            View Analytics
+        </a>
+    </div>
+
+    <div class="full-lists">
+        <div>
+            <h3 style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="display: flex; gap: 0.5rem; align-items: center;">
+                    Recent Workouts
+                    <a href="{% url 'create_workout' user.pk %}" style="color: #3498db; text-decoration: none; border-radius: 4px; font-size: 1.5rem;">+</a>
+                </span>
+                <a href="{% url 'all_workouts' user.pk %}" style="color: #3498db; text-decoration: none;">View All</a>
+            </h3>
+            {% if workouts %}
+                <ul>
+                    {% for workout in workouts %}
+                        <li>
+                            <span>
+                                <strong>Date:</strong> {{workout.date}} - 
+                                <strong>Type:</strong> {{workout.type}}
+                            </span>
+                            <a href="{% url 'view_workout' pk=workout.pk %}" class="btn">View Details</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No workouts found. Start your fitness journey by creating your first workout!</p>
+            {% endif %}
+        </div>
+
+        <div>
+            <h3>Recent Meals</h3>
+            {% if meals %}
+                <ul>
+                    {% for meal in meals %}
+                        <li>
+                            <span>
+                                <strong>Date:</strong> {{meal.date}} - 
+                                <strong>Type:</strong> {{meal.meal_type}} -
+                                <strong>Cals:</strong> {{meal.calories}}
+                            </span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No meals found.</p>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

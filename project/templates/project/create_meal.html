@@ -1,0 +1,15 @@
+{% extends "project/base.html" %}
+
+{% block content %}
+<div>
+    <h2>Log a meal</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Save Meal</button>
+    </form>
+    
+    <a href="{% url 'profile' pk=request.user.pk %}" class="btn">Back to Profile</a>
+</div>
+{% endblock %}
+

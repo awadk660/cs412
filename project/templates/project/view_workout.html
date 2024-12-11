@@ -1,0 +1,27 @@
+{% extends "project/base.html" %}
+
+{% block content %}
+    <p>{{workout.type}} workout, {{workout.date}}</p>
+    <a href="{% url 'add_exercise' pk=workout.pk %}" class="btn">
+        Add Exercise
+    </a>
+    <div class="full-lists">
+        <ul>
+            {% if workout.type == "strength" %}
+                {% for exercise in exercises %}
+                    <li>
+                        <strong>{{ exercise.name }}</strong> - {{exercise.weight}}, {{exercise.sets}} x {{exercise.reps}}
+                    </li>
+                {% endfor %}
+            {% else %}
+                {% for exercise in exercises %}
+                <li>
+                    <strong>{{ exercise.name }}</strong> - {{exercise.distance}} in {{exercise.time}}
+                </li>
+                {% endfor %}
+            {% endif %}
+
+        </ul>
+    </div>
+    <a href="{% url 'profile' user.pk %}" class="btn">Back to Profile</a>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "project/base.html" %}
+
+{% block content %}
+    <h2>All Workouts</h2>
+    <a href="{% url 'profile' user.pk %}" class="btn">Back to Profile</a>
+    <a href="{% url 'create_workout' user.pk %}" class="btn">New Workout</a>
+    <div class="full-lists" style="background-color: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: block; max-width: 100%; margin: auto;">
+        {% if workouts %}
+            <ul>
+                {% for workout in workouts %}
+                    <li>
+                        <span>
+                            <strong>Date:</strong> {{ workout.date }} - 
+                            <strong>Type:</strong> {{ workout.type }}
+                        </span>
+                        <a href="{% url 'view_workout' workout.pk %}" class="btn">View Details</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No workouts found.</p>
+        {% endif %}
+    </div>
+{% endblock %}

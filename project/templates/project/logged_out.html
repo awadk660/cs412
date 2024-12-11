@@ -1,0 +1,9 @@
+{% extends "project/base.html" %}
+
+{% block content %}
+<div>
+    <h2>You have been logged out</h2>
+    <p>Thank you for visiting Fitness App!</p>
+    <p><a href="{% url 'login' %}">Log in again</a></p>
+</div>
+{% endblock %}

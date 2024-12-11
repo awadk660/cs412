@@ -13,7 +13,7 @@ class Profile(models.Model):
     city = models.TextField(blank=False)
     email = models.EmailField(blank=False)
     image_url = models.URLField(blank=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='mini_fb_profile')
 
     def __str__(self):
         '''Return a string representation of this object.'''

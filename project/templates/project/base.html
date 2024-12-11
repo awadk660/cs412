@@ -1,0 +1,44 @@
+{% load static %}
+<html>
+    <head>
+        <title>Fitness App</title>
+        <link rel="stylesheet" href="{% static 'project/styles.css' %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <body>
+        <header>
+            <h1>Fitness App</h1>
+            <nav>
+                <ul>
+                    {% if request.user.is_authenticated %}
+                        <li>
+                            <p>Welcome, {{ request.user.username }}!</p>
+                        </li>
+                        <li>
+                            <form action="{% url 'logout' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="submit" value="Logout">
+                            </form>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{% url 'login' %}">Login</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <div>
+                {% block content %}
+
+                {% endblock %}
+            </div>
+        </main>
+
+        <footer>
+            <p>Made by Awad Khawaja</p>
+        </footer>
+    </body>
+</html>

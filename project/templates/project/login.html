@@ -1,0 +1,23 @@
+<body style="height:100%; margin:0; padding:0; display:flex; justify-content:center; align-items:center; background-color: black; font-family: 'Arial', sans-serif; color: #ccc;">
+    <div style="border:1px solid #ccc; padding:20px; border-radius:10px; text-align:center; box-shadow:0 0 10px rgba(0,0,0,0.1); background-color: #2c3e50;">
+        <h2>Login</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            {{ form }}
+
+            <input type="submit" name="submit" value="Login" style="background-color: #e74c3c; padding: 0.5rem; border-radius: 4px;">
+
+            {% if request.GET.next %}
+            <input type="hidden" name="next" value="{{ request.GET.next }}">
+            {% else %}
+            <input type="hidden" name="next" value="{% url 'home' %}">
+            {% endif %}
+        </form>
+
+        <p>Don't have a profile yet?</p>
+        <a href="{% url 'create_user_form' %}">
+            <button type="button" style="background-color: #e74c3c; padding: 0.5rem; border-radius: 4px;">Create Profile</button>
+        </a>
+    </div>
+</body>

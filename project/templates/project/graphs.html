@@ -1,0 +1,31 @@
+{% extends "project/base.html" %}
+
+{% block content %}
+<h2>Workout Analytics</h2>
+
+<!-- Metrics -->
+<div class="metrics">
+    <a href="{% url 'profile' user.pk %}" class="btn">Back to Profile</a>
+    <h3>Metrics</h3>
+    <p>Longest Workout Streak: {{ longest_streak }} days</p>
+    <p>Days hit calorie goal: {{ calorie_goal_days }}</p>
+    <p>Most Weight Lifted in a Workout: {{ most_weight_lifted }}</p>
+</div>
+
+<!-- Graphs -->
+<div class="graphs">
+    <h3>Graphs</h3>
+    {% if CardioGraph %}
+        <div>
+            <h4>Cardio Training</h4>
+            {{ CardioGraph|safe }}
+        </div>
+    {% endif %}
+    {% if StrengthGraph %}
+        <div>
+            <h4>Strength Training</h4>
+            {{ StrengthGraph|safe }}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
